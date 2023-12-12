@@ -3,6 +3,7 @@
 import "@mantine/core/styles.css";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import Header from "@/components/Navbar/Header";
+import { FooterLinks } from "@/components/Footer/Footer";
 
 export const metadata = {
   title: "My Mantine app",
@@ -23,6 +24,7 @@ export default function RootLayout({
         <MantineProvider defaultColorScheme="dark">
           <Header />
           {children}
+          <FooterLinks />
         </MantineProvider>
       </body>
     </html>
