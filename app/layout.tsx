@@ -5,7 +5,8 @@ import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import Header from "@/components/Navbar/Header";
 import { FooterLinks } from "@/components/Footer/Footer";
 import { Metadata } from "next";
-
+import Provider from "./Provider";
+import "./globals.css";
 export const metadata: Metadata = {
   title: "Hydrominex",
   description: "Made by Team Hydrominex",
@@ -41,11 +42,13 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider defaultColorScheme="dark">
-          <Header />
-          {children}
-          <FooterLinks />
-        </MantineProvider>
+        <Provider>
+          <MantineProvider defaultColorScheme="dark">
+            <Header />
+            {children}
+            <FooterLinks />
+          </MantineProvider>
+        </Provider>
       </body>
     </html>
   );
