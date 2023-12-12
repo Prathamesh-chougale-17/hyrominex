@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import ActionToggle from "../DarkMode/ChangeTheme";
 
 const links = [
   { link: "/", label: "Home" },
@@ -23,7 +24,7 @@ const Header = () => {
       <div className={classes.inner}>
         <Group>
           {/* <MantineLogo size={28} /> */}
-          <Image src={MantineLogo} alt="Mantine Logo" width={40} height={40} />
+          <Image src={MantineLogo} alt="Mantine Logo" width={60} height={60} />
         </Group>
 
         <Group>
@@ -39,6 +40,7 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
+            <ActionToggle />
             {status === "authenticated" ? (
               <Menu>
                 <Menu.Target>

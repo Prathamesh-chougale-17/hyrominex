@@ -12,11 +12,13 @@ export const metadata: Metadata = {
   description: "Made by Team Hydrominex",
   icons:
     "https://img.freepik.com/premium-vector/dump-truck-icon-isolated-white-background_103044-862.jpg?w=740",
-  metadataBase: new URL("https://hydrominex.vercel.app/"),
+  metadataBase: new URL(
+    "https://hydrominex-prathamesh-chougale-17.vercel.app/"
+  ),
   openGraph: {
     title: "Hydrominex",
     description: "Hydrominex's personal website",
-    url: "https://hydrominex.vercel.app/",
+    url: "https://hydrominex-prathamesh-chougale-17.vercel.app/",
     siteName: "Hydrominex",
     images: [
       {
