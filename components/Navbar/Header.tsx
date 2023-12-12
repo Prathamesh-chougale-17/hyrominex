@@ -4,6 +4,7 @@ import MantineLogo from "../../public/android-chrome-192x192.png";
 import classes from "./Header.module.css";
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/link";
 
 const links = [
   { link: "/", label: "Home" },
@@ -14,23 +15,12 @@ const links = [
 const Header = () => {
   const [opened, setOpened] = useState(false);
 
-  const items = links.map((link) => (
-    <a
-      key={link.label}
-      href={link.link}
-      className={classes.link}
-      onClick={(event) => event.preventDefault()}
-    >
-      {link.label}
-    </a>
-  ));
-
   return (
     <header className={classes.header}>
       <div className={classes.inner}>
         <Group>
           {/* <MantineLogo size={28} /> */}
-          <Image src={MantineLogo} alt="Mantine Logo" width={28} height={28} />
+          <Image src={MantineLogo} alt="Mantine Logo" width={40} height={40} />
         </Group>
 
         <Group>
@@ -41,7 +31,11 @@ const Header = () => {
             hiddenFrom="sm"
           />
           <Group ml={50} gap={5} className={classes.links} visibleFrom="sm">
-            {items}
+            {links.map((link) => (
+              <Link key={link.label} href={link.link} className={classes.link}>
+                {link.label}
+              </Link>
+            ))}
           </Group>
         </Group>
       </div>
