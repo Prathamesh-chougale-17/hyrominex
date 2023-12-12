@@ -3,7 +3,7 @@
     height: rem(22px);
   }
   
-  .dark {
+  .light {
     @mixin dark {
       display: none;
     }
@@ -13,7 +13,7 @@
     }
   }
   
-  .light {
+  .dark {
     @mixin light {
       display: none;
     }
