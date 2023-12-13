@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
+import Truck from "../../public/truck.png";
 //revatidate the code
 
 // Dynamically import the components from 'react-leaflet'
@@ -23,6 +24,7 @@ const TileLayer = dynamic(
 import "leaflet/dist/leaflet.css";
 import { Icon, LatLngExpression } from "leaflet";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 const LeafMap = () => {
   const [position, setPosition] = React.useState<LatLngExpression>([
     18.654543, 73.761443,
@@ -51,7 +53,16 @@ const LeafMap = () => {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
         <Marker position={position} icon={costumIcon}>
-          <Popup>{session?.user?.name || "Anonomous Driver"}</Popup>
+          <Popup>
+            <Image
+              src={session?.user?.image || Truck}
+              alt="user iamge"
+              width={130}
+              height={130}
+            />
+            <br />
+            {session?.user?.name || "Anonomous Driver"}
+          </Popup>
         </Marker>
       </MapContainer>
     </div>
