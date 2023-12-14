@@ -2,7 +2,11 @@
 import { Title, Text, Button, Container, Group } from "@mantine/core";
 import classes from "./ServerError.module.css";
 
-const ServerError = () => {
+interface Props {
+  error: Error;
+  reset: () => void;
+}
+const ServerError = ({ error, reset }: Props) => {
   return (
     <div className={classes.root}>
       <Container>
@@ -11,9 +15,11 @@ const ServerError = () => {
         <Text size="lg" ta="center" className={classes.description}>
           Our servers could not handle your request. Don&apos;t worry, our
           development team was already notified. Try refreshing the page.
+          <br />
+          {error.message}
         </Text>
         <Group justify="center">
-          <Button variant="white" size="md">
+          <Button variant="white" size="md" onClick={() => reset()}>
             Refresh the page
           </Button>
         </Group>
