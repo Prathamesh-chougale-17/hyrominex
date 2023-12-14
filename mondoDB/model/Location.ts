@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 
 const locationSchema = new Schema({
     id: {
@@ -15,8 +15,16 @@ const locationSchema = new Schema({
         type: Number,
         required: true,
     },
+    image: {
+        type: String,
+        required: true,
+    },
+    name: {
+        type: String,
+        required: true,
+    },
 });
 
-const Location = model('Location', locationSchema);
+const Location = mongoose.models.Location || model('Location', locationSchema);
 
 export default Location;
