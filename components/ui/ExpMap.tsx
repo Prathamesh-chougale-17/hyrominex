@@ -106,15 +106,13 @@ const LeafMap = () => {
       }
     });
   }, [session?.user?.email]);
-  setTimeout(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords;
-      setPosition([latitude, longitude]);
-      if (session?.user?.email) {
-        updateLiveLocation(session?.user?.email!, latitude, longitude);
-      }
-    });
-  }, 1000);
+  navigator.geolocation.watchPosition((position) => {
+    const { latitude, longitude } = position.coords;
+    setPosition([latitude, longitude]);
+    if (session?.user?.email) {
+      updateLiveLocation(session?.user?.email!, latitude, longitude);
+    }
+  });
 
   const costumIcon = new Icon({
     iconUrl: "/marker.png",
@@ -123,12 +121,13 @@ const LeafMap = () => {
   const [users, setUsers] = React.useState<Users[]>([]);
   const [loading, setLoading] = React.useState(true);
   useEffect(() => {
-    setInterval(async () => {
+    const getData = async () => {
       const data = await GetData();
       setUsers(data);
       setLoading(false);
-    }, 1000);
-  }, []);
+    };
+    getData();
+  }, [position]);
   if (loading) {
     return <div>Loading...</div>;
   }
