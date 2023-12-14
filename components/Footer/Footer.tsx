@@ -84,7 +84,12 @@ export function FooterLinks() {
           wrap="nowrap"
         >
           <ActionIcon size="lg" color="gray" variant="subtle">
-            <YoutubeIcon scale={2} />
+            <Link
+              href="https://www.youtube.com/channel/UCdojH6e-M_89K8GKshE-qfA"
+              target="_blank"
+            >
+              <YoutubeIcon scale={2} />
+            </Link>
           </ActionIcon>
           <ActionIcon size="lg" color="gray" variant="subtle">
             <Link href="https://twitter.com/HydroMinex" target="_blank">
