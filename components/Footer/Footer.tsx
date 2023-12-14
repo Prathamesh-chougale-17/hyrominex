@@ -3,6 +3,7 @@ import { YoutubeIcon, InstagramIcon, Twitter } from "lucide-react";
 import HydroMinex from "../../public/android-chrome-192x192.png";
 import classes from "./FooterLinks.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
 const data = [
   {
@@ -86,10 +87,14 @@ export function FooterLinks() {
             <YoutubeIcon scale={2} />
           </ActionIcon>
           <ActionIcon size="lg" color="gray" variant="subtle">
-            <Twitter scale={2} />
+            <Link href="https://twitter.com/HydroMinex" target="_blank">
+              <Twitter scale={2} />
+            </Link>
           </ActionIcon>
           <ActionIcon size="lg" color="gray" variant="subtle">
-            <InstagramIcon scale={2} />
+            <Link href="https://www.instagram.com/hydrominex/" target="_blank">
+              <InstagramIcon scale={2} />
+            </Link>
           </ActionIcon>
         </Group>
       </Container>
