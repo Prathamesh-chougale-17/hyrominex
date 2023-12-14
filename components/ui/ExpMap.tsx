@@ -128,7 +128,7 @@ const LeafMap = () => {
       setUsers(data);
       setLoading(false);
     }, 1000);
-    return () => clearInterval(interval);
+    // return () => clearInterval(interval);
   }, []);
   if (loading) {
     return <div>Loading...</div>;
@@ -165,7 +165,7 @@ const LeafMap = () => {
             <Popup>
               <Image
                 src={session?.user?.image || Truck}
-                alt="user iamge"
+                alt="user image"
                 width={130}
                 height={130}
               />
