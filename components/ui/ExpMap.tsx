@@ -122,19 +122,14 @@ const LeafMap = () => {
   });
   const [users, setUsers] = React.useState<Users[]>([]);
   const [loading, setLoading] = React.useState(true);
-  // React.useEffect(() => {
-  //   const interval = setInterval(async () => {
-  //     const data = await GetData();
-  //     setUsers(data);
-  //     setLoading(false);
-  //   }, 1000);
-  //   // return () => clearInterval(interval);
-  // }, []);
-  setTimeout(async () => {
-    const data = await GetData();
-    setUsers(data);
-    setLoading(false);
-  }, 1000);
+  React.useEffect(() => {
+    const interval = setInterval(async () => {
+      const data = await GetData();
+      setUsers(data);
+      setLoading(false);
+    }, 1000);
+    // return () => clearInterval(interval);
+  }, []);
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -170,7 +165,7 @@ const LeafMap = () => {
             <Popup>
               <Image
                 src={session?.user?.image || Truck}
-                alt="user image"
+                alt="user ige"
                 width={130}
                 height={130}
               />
