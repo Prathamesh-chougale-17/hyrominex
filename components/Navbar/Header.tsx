@@ -50,7 +50,11 @@ const Header = () => {
               <Menu.Dropdown>
                 {links.map((link) => (
                   <Menu.Item key={link.label}>
-                    <Link className={classes.Dropdown} href={link.link}>
+                    <Link
+                      className={classes.Dropdown}
+                      href={link.link}
+                      onClick={() => setOpened(!opened)}
+                    >
                       {link.label}
                     </Link>
                   </Menu.Item>
