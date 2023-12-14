@@ -12,6 +12,7 @@
     "@auth/mongodb-adapter": "^2.0.8",
     "@mantine/core": "^7.3.1",
     "@mantine/hooks": "^7.3.1",
+    "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.294.0",

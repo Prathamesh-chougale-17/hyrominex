@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { use, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Truck from "../../public/truck.png";
 //revatidate the code
@@ -27,22 +27,75 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 const LeafMap = () => {
   const [position, setPosition] = React.useState<LatLngExpression>([
-    18.654543, 73.761443,
+    16.654543, 73.761443,
   ]);
-  useEffect(() => {
-    setTimeout(() => {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        setPosition([latitude, longitude]);
+  const sendLiveLocation = async (
+    userId: string,
+    latitude: number,
+    longitude: number
+  ) => {
+    try {
+      await fetch("/api/location", {
+        method: "POST",
+        body: JSON.stringify({
+          userId,
+          latitude,
+          longitude,
+        }),
+      }).then((Response) => {
+        // (Response.status);
+        console.log(Response.body);
       });
-    }, 1000);
-  });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const updateLiveLocation = async (
+    userId: string,
+    latitude: number,
+    longitude: number
+  ) => {
+    try {
+      await fetch(`/api/location/${userId}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          userId,
+          latitude,
+          longitude,
+        }),
+      }).then((Response) => {
+        // (Response.status);
+        console.log("PUT");
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const { data: session } = useSession();
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      setPosition([latitude, longitude]);
+      if (session?.user?.email) {
+        sendLiveLocation(session?.user?.email!, latitude, longitude);
+      }
+    });
+  }, [session?.user?.email]);
+  setTimeout(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      setPosition([latitude, longitude]);
+      if (session?.user?.email) {
+        updateLiveLocation(session?.user?.email!, latitude, longitude);
+      }
+    });
+  }, 1000);
 
   const costumIcon = new Icon({
     iconUrl: "/marker.png",
     iconSize: [25, 25],
   });
-  const { data: session } = useSession();
 
   return (
     <div>
