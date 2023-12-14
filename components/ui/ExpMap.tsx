@@ -122,14 +122,19 @@ const LeafMap = () => {
   });
   const [users, setUsers] = React.useState<Users[]>([]);
   const [loading, setLoading] = React.useState(true);
-  React.useEffect(() => {
-    const interval = setInterval(async () => {
-      const data = await GetData();
-      setUsers(data);
-      setLoading(false);
-    }, 1000);
-    // return () => clearInterval(interval);
-  }, []);
+  // React.useEffect(() => {
+  //   const interval = setInterval(async () => {
+  //     const data = await GetData();
+  //     setUsers(data);
+  //     setLoading(false);
+  //   }, 1000);
+  //   // return () => clearInterval(interval);
+  // }, []);
+  setTimeout(async () => {
+    const data = await GetData();
+    setUsers(data);
+    setLoading(false);
+  }, 1000);
   if (loading) {
     return <div>Loading...</div>;
   }
