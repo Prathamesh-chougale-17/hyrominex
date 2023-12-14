@@ -128,7 +128,7 @@ const LeafMap = () => {
       setUsers(data);
       setLoading(false);
     }, 1000);
-    // return () => clearInterval(interval);
+    return () => clearInterval(interval);
   }, []);
   if (loading) {
     return <div>Loading...</div>;
