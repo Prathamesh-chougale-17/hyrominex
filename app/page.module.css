@@ -1,3 +1,8 @@
 .main{
-padding-top: 6rem;
+padding-top: 4rem;
+padding-left: 6px;
+}
+
+.pagejustify{
+  text-align: justify;
 }
