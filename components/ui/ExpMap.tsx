@@ -28,7 +28,7 @@ import Image from "next/image";
 import { set } from "mongoose";
 const GetData = async () => {
   try {
-    const res = await fetch("/api/location", { cache: "no-store" });
+    const res = await fetch("/api/location", { cache: "no-cache" });
     if (!res.ok) {
       throw new Error("Not Found");
     }
