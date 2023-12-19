@@ -25,6 +25,7 @@ import "leaflet/dist/leaflet.css";
 import { Icon, LatLngExpression } from "leaflet";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { set } from "mongoose";
 const GetData = async () => {
   try {
     const res = await fetch("/api/location", { cache: "no-store" });
@@ -89,7 +90,8 @@ const LeafMap = () => {
   const [position, setPosition] = React.useState<LatLngExpression>([
     16.654543, 73.761443,
   ]);
-
+  const [users, setUsers] = React.useState<Users[]>([]);
+  const [loading, setLoading] = React.useState(true);
   const { data: session } = useSession();
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -118,12 +120,12 @@ const LeafMap = () => {
     iconUrl: "/marker.png",
     iconSize: [25, 25],
   });
-  const [users, setUsers] = React.useState<Users[]>([]);
-  const [loading, setLoading] = React.useState(true);
+
   useEffect(() => {
     const getData = async () => {
       const data = await GetData();
       setUsers(data);
+      console.log(data);
       setLoading(false);
     };
     getData();
@@ -140,6 +142,7 @@ const LeafMap = () => {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
         {session?.user?.email ? (
+          //re-render the map with the new data from the database
           users.map((user) => (
             <Marker
               position={[user.latitude, user.longitude]}
@@ -154,7 +157,7 @@ const LeafMap = () => {
                   height={130}
                 />
                 <br />
-                {user.name || "Anonomous Driver"}
+                {user.name || "Anonomous Driver"}{" "}
               </Popup>
             </Marker>
           ))
