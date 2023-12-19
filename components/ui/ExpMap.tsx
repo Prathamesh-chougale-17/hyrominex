@@ -25,7 +25,6 @@ import "leaflet/dist/leaflet.css";
 import { Icon, LatLngExpression } from "leaflet";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { set } from "mongoose";
 const GetData = async () => {
   try {
     const res = await fetch("/api/location", { cache: "no-cache" });
