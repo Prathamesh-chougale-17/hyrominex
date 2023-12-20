@@ -20,11 +20,15 @@ const TileLayer = dynamic(
   () => import("react-leaflet").then((mod) => mod.TileLayer),
   { ssr: false }
 );
+import "leaflet-control-geocoder/dist/Control.Geocoder.css";
+// import "leaflet-control-geocoder/dist/Control.Geocoder.js";
 
 import "leaflet/dist/leaflet.css";
 import { Icon, LatLngExpression } from "leaflet";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { Circle } from "react-leaflet";
+import LeafletGeocode from "./LeafletGeocode";
 const GetData = async () => {
   try {
     const res = await fetch("/api/location", { cache: "no-cache" });
@@ -161,18 +165,23 @@ const LeafMap = () => {
             </Marker>
           ))
         ) : (
-          <Marker position={position} icon={costumIcon}>
-            <Popup>
-              <Image
-                src={session?.user?.image || Truck}
-                alt="user image"
-                width={130}
-                height={130}
-              />
-              <br />
-              {session?.user?.name || "Anonomous Driver"}
-            </Popup>
-          </Marker>
+          <>
+            <LeafletGeocode />
+            <Circle center={position} radius={200}>
+              <Marker position={position} icon={costumIcon}>
+                <Popup>
+                  <Image
+                    src={session?.user?.image || Truck}
+                    alt="user image"
+                    width={130}
+                    height={130}
+                  />
+                  <br />
+                  {session?.user?.name || "Anonomous Driver"}
+                </Popup>
+              </Marker>
+            </Circle>
+          </>
         )}
       </MapContainer>
     </div>
