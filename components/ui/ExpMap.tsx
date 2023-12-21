@@ -29,6 +29,17 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { Circle } from "react-leaflet";
 import LeafletGeocode from "./LeafletGeocode";
+import RoutingMachine from "./RoutingMachine";
+
+import L from "leaflet";
+
+const costumIcon = new Icon({
+  iconUrl: "/marker.png",
+  iconSize: [25, 25],
+});
+
+L.Marker.prototype.options.icon = costumIcon;
+
 const GetData = async () => {
   try {
     const res = await fetch("/api/location", { cache: "no-cache" });
@@ -119,11 +130,6 @@ const LeafMap = () => {
     }
   });
 
-  const costumIcon = new Icon({
-    iconUrl: "/marker.png",
-    iconSize: [25, 25],
-  });
-
   useEffect(() => {
     const getData = async () => {
       const data = await GetData();
@@ -166,7 +172,8 @@ const LeafMap = () => {
           ))
         ) : (
           <>
-            <LeafletGeocode />
+            {/* <LeafletGeocode position={position} /> */}
+            <RoutingMachine position={position} />
             <Circle center={position} radius={200}>
               <Marker position={position} icon={costumIcon}>
                 <Popup>
