@@ -28,10 +28,11 @@ import { Icon, LatLngExpression } from "leaflet";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { Circle } from "react-leaflet";
-import LeafletGeocode from "./LeafletGeocode";
 import RoutingMachine from "./RoutingMachine";
 
 import L from "leaflet";
+import Exp1 from "./offlineMap/Exp1";
+import Exp2 from "./offlineMap/Exp2";
 
 const costumIcon = new Icon({
   iconUrl: "/marker.png",
@@ -171,24 +172,8 @@ const LeafMap = () => {
             </Marker>
           ))
         ) : (
-          <>
-            {/* <LeafletGeocode position={position} /> */}
-            <RoutingMachine position={position} />
-            <Circle center={position} radius={200}>
-              <Marker position={position} icon={costumIcon}>
-                <Popup>
-                  <Image
-                    src={session?.user?.image || Truck}
-                    alt="user image"
-                    width={130}
-                    height={130}
-                  />
-                  <br />
-                  {session?.user?.name || "Anonomous Driver"}
-                </Popup>
-              </Marker>
-            </Circle>
-          </>
+        //  <Exp1 />
+        <Exp2 />
         )}
       </MapContainer>
     </div>

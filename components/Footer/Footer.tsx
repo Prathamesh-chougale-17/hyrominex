@@ -1,6 +1,6 @@
 import { Text, Container, ActionIcon, Group, rem } from "@mantine/core";
 import { YoutubeIcon, InstagramIcon, Twitter } from "lucide-react";
-import HydroMinex from "../../public/android-chrome-192x192.png";
+// import HydroMinex from "../../public/android-chrome-192x192.png";
 import classes from "./FooterLinks.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -60,12 +60,12 @@ export function FooterLinks() {
     <footer className={classes.footer}>
       <Container className={classes.inner}>
         <div className={classes.logo}>
-          <Image
+          {/* <Image
             src={HydroMinex}
             alt="HydroMinex Logo"
             width={40}
             height={40}
-          />
+          /> */}
           <Text size="xs" c="dimmed" className={classes.description}>
             Build fully to avoid the Accident at Heights
           </Text>

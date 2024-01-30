@@ -1,6 +1,6 @@
 "use client";
 import { Group, Burger, Button, Menu, Avatar } from "@mantine/core";
-import MantineLogo from "../../public/android-chrome-192x192.png";
+// import MantineLogo from "../../public/android-chrome-192x192.png";
 import classes from "./Header.module.css";
 import Image from "next/image";
 import { useState } from "react";
@@ -25,14 +25,14 @@ const Header = () => {
         <Group>
           {/* <MantineLogo size={28} /> */}
           <Link href="/">
-            <Image
+            {/* <Image
               src={MantineLogo}
               alt="HyroMinex Logo"
               width={60}
               height={60}
               className={classes.logo}
               priority
-            />
+            /> */}
           </Link>
         </Group>
 
