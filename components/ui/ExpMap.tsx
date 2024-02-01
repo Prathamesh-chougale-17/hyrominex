@@ -94,6 +94,7 @@ const updateLiveLocation = async (
   }
 };
 
+
 interface Users {
   userId: string;
   name: string;
@@ -102,8 +103,17 @@ interface Users {
   image: string;
 }
 const LeafMap = () => {
+  //live location
+  const [latitude, setLatitude] = React.useState(0);
+  const [longitude, setLongitude] = React.useState(0);
+  React.useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+    });
+  }, []);
   const [position, setPosition] = React.useState<LatLngExpression>([
-    16.654543, 73.761443,
+    latitude,longitude
   ]);
   const [users, setUsers] = React.useState<Users[]>([]);
   const [loading, setLoading] = React.useState(true);
@@ -145,7 +155,7 @@ const LeafMap = () => {
   }
 
   return (
-    <div>
+    <div className="-z-10">
       <MapContainer center={position} zoom={13} style={{ height: "600px" }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -154,22 +164,20 @@ const LeafMap = () => {
         {session?.user?.email ? (
           //re-render the map with the new data from the database
           users.map((user) => (
-            <Marker
-              position={[user.latitude, user.longitude]}
-              icon={costumIcon}
-              key={user.userId}
-            >
-              <Popup>
-                <Image
-                  src={user.image || Truck}
-                  alt="user image"
-                  width={130}
-                  height={130}
-                />
-                <br />
-                {user.name || "Anonomous Driver"}{" "}
-              </Popup>
-            </Marker>
+            <Circle center={[user.latitude, user.longitude]} radius={200}>
+              <Marker position={[user.latitude, user.longitude]} icon={costumIcon}>
+                <Popup>
+                  <Image
+                    src={user.image}
+                    alt="user image"
+                    width={130}
+                    height={130}
+                  />
+                  <br />
+                  {user.name}
+                </Popup>
+              </Marker>
+            </Circle>
           ))
         ) : (
         //  <Exp1 />
